@@ -26,14 +26,17 @@ void setup() {
     ObjectInputStream ios = new ObjectInputStream(new FileInputStream(dataPath("greedy.sol")));
     Solution s = (Solution) ios.readObject();
     ProblemInfo info = s.info;
+    
+    int[] sentData = s.getSentDataArray();
+    
     print(s.valid());
-    print(s.getTarget(33));
+    print(s.getTarget(31));
     for (int i = 0; i < info.C; i++) {
       datacenters.add(new Datacenter(s.entity(i)));
     }
 
     for (int i = info.C; i < info.C + info.N; i++) {
-      sensors.add(new Sensor(i, s.entity(i), s.entity(s.getTarget(i))));
+      sensors.add(new Sensor(i, sentData[i], s.entity(i), s.entity(s.getTarget(i))));
     }
   }
   catch (Exception e) {
@@ -46,11 +49,22 @@ void draw() {
   
   noFill();
   stroke(255);
+  strokeWeight(1);
   rectMode(CORNER);
   square(0, 0, SCREEN_MIN-1);
 
   textSize(64);
   textCenter("SIMULATION", SCREEN_MIN + (width-SCREEN_MIN)/2, 100);
+  
+  noStroke();
+  fill(SENSOR_TIER_ONE);
+  square(SCREEN_MIN + 100, 400, 50);
+  
+  fill(SENSOR_TIER_TWO);
+  square(SCREEN_MIN + 100, 500, 50);
+  
+  fill(SENSOR_TIER_FIVE);
+  square(SCREEN_MIN + 100, 600, 50);
   
   for (var sensor : sensors) {
     sensor.render();

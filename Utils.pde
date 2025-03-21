@@ -9,3 +9,16 @@ PVector remapPos(Entity e) {
 void textCenter(String text, float x, float y) {
   text(text, x - textWidth(text)/2, y - textAscent()/2);
 }
+
+color bitrateToColor(int bitrate) {
+  switch (bitrate) {
+    case 1:
+      return SENSOR_TIER_ONE;
+    case 2:
+      return SENSOR_TIER_TWO;
+    case 5:
+      return SENSOR_TIER_FIVE;
+    }
+  
+  return color(124, 10, 240);
+}
