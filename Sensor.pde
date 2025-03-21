@@ -34,23 +34,24 @@ class Sensor {
     //stroke(lerpColor(myColor, targetColor, time));
 
     if (wrappedEntity.bitrate()*3 == sentData) stroke(255, 0, 0);
-    
+
     line(pos.x, pos.y, targetPos.x, targetPos.y);
 
-    println(time);
+    //println(time);
 
     PVector dataPointPos = PVector.lerp(pos, targetPos, time);
     strokeWeight(sentData);
 
     point(dataPointPos.x, dataPointPos.y);
     //textSize(20);
-    //text(sentData, dataPointPos.x, dataPointPos.y);
-    
+
     noStroke();
     circle(pos.x, pos.y, 15);
 
     textSize(20);
     fill(255);
+    text(sentData, dataPointPos.x + 5, dataPointPos.y + 5);
+
     text(id, pos.x + 10, pos.y + 10);
   }
 }
